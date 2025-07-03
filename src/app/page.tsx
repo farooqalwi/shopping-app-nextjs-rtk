@@ -1,0 +1,36 @@
+import { Product } from '../types/product';
+import ProductCard from './components/ProductCard';
+
+export default async function HomePage() {
+  let products: Product[] = [];
+
+  try {
+    const res = await fetch('https://fakestoreapi.com/products', {
+      cache: 'no-store',
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch products');
+    }
+
+    products = await res.json();
+  } catch (error) {
+    return (
+      <div>
+        <h1 className="page-title">🛍️ Shopping App</h1>
+        <p style={{ color: 'red' }}>Error loading products. Please try again later.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <h1 className="page-title">🛍️ Shopping App</h1>
+      <div className="product-list">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
+  );
+}

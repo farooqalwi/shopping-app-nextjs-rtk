@@ -1,0 +1,36 @@
+'use client';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store';
+import { removeFromCart } from '../../store/cartSlice';
+
+export default function CartPage() {
+  const cartItems = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      {cartItems.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        <div style={{ marginTop: 20 }}>
+          {cartItems.map(item => (
+            <div key={item.id} className="cart-item">
+              <img src={item.image} alt={item.title} />
+              <div style={{ flex: 1 }}>
+                <h4 style={{ margin: '0 0 5px 0' }}>{item.title}</h4>
+                <p style={{ margin: 0 }}>${item.price}</p>
+              </div>
+              <button
+                className="cart-btn remove"
+                onClick={() => dispatch(removeFromCart(item.id))}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
