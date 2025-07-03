@@ -14,7 +14,7 @@ export default async function HomePage() {
     }
 
     products = await res.json();
-  } catch (error) {
+  } catch {
     return (
       <div>
         <h1 className="page-title">🛍️ Shopping App</h1>

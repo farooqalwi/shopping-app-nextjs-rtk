@@ -4,6 +4,7 @@ import { Product } from '../../types/product';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { addToCart, removeFromCart } from '../../store/cartSlice';
+import Image from 'next/image';
 
 interface ProductCardProps {
   product: Product;
@@ -26,7 +27,13 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   return (
     <div className="product-card">
-      <img src={product.image} alt={product.title} className="product-image" />
+      <Image
+        src={product.image}
+        alt={product.title}
+        width={100}
+        height={100}
+        className="product-image"
+      />
       <h4 className="product-title">{product.title}</h4>
       <p className="product-price">${product.price}</p>
       <button

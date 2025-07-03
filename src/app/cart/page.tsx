@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { removeFromCart } from '../../store/cartSlice';
@@ -16,7 +17,12 @@ export default function CartPage() {
         <div style={{ marginTop: 20 }}>
           {cartItems.map(item => (
             <div key={item.id} className="cart-item">
-              <img src={item.image} alt={item.title} />
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={100}
+                height={100}
+              />
               <div style={{ flex: 1 }}>
                 <h4 style={{ margin: '0 0 5px 0' }}>{item.title}</h4>
                 <p style={{ margin: 0 }}>${item.price}</p>
