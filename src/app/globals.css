@@ -154,3 +154,27 @@ body {
     transform: rotate(360deg);
   }
 }
+
+
+/* styles/globals.css or scoped CSS module */
+.view-details-link {
+  display: inline-block;
+  padding: 6px 14px;
+  margin-right: 10px;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  transition: all 0.2s ease;
+  margin-bottom: 10px;
+  margin-top: auto;
+}
+
+.view-details-link:hover {
+  background-color: #e0e0e0;
+  border-color: #999;
+  color: #000;
+}

@@ -1,35 +1,28 @@
-import ImageSlider from './ImageSlider';
+import { use } from 'react';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import ImageSlider from './ImageSlider';
 import AddRemoveCartBtn from '../../components/AddRemoveCartBtn';
 
-interface ProductDetailProps {
-  params: {
-    id: string;
-  };
-}
+export default function ProductDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params); // unwrap params
 
-export default async function ProductDetail({ params }: ProductDetailProps) {
-  let product;
+  const res = use(
+    fetch(`https://dummyjson.com/products/${id}`, { cache: 'no-store' }).catch(() => null)
+  );
 
-  try {
-    const res = await fetch(`https://dummyjson.com/products/${params.id}`, {
-      cache: 'no-store',
-    });
+  if (!res || !res.ok) return notFound();
 
-    if (!res.ok) return notFound();
+  const product = use(res.json().catch(() => notFound()));
 
-    product = await res.json();
-  } catch {
-    return notFound();
-  }
-
-  const validImages =
-    product.images?.length > 0 ? product.images : [product.thumbnail || '/placeholder.png'];
+  const validImages = product.images?.length > 0
+    ? product.images
+    : [product.thumbnail || '/placeholder.png'];
 
   return (
     <div style={{ padding: '30px', maxWidth: 1000, margin: 'auto' }}>
       <div style={{ display: 'flex', gap: 40, flexWrap: 'wrap' }}>
-        {/* Image Section */}
+        {/* Image slider */}
         <ImageSlider
           images={validImages}
           title={product.title}
@@ -37,7 +30,7 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
           brand={product.brand}
         />
 
-        {/* Product Info */}
+        {/* Product details */}
         <div style={{ flex: 1 }}>
           <h1 style={{ marginBottom: 10 }}>{product.title}</h1>
           <p style={{ color: '#555', marginBottom: 20 }}>{product.description}</p>
@@ -94,18 +87,20 @@ export default async function ProductDetail({ params }: ProductDetailProps) {
           </div>
 
           <div style={{ marginTop: 20 }}>
-            <img
+            <Image
               src={product.meta.qrCode}
               alt="QR Code"
               width={100}
               height={100}
             />
-            <p style={{ fontSize: 12, color: '#888' }}>Barcode: {product.meta.barcode}</p>
+            <p style={{ fontSize: 12, color: '#888' }}>
+              Barcode: {product.meta.barcode}
+            </p>
           </div>
         </div>
       </div>
 
-      {/* Reviews Section */}
+      {/* Reviews */}
       <div style={{ marginTop: 40 }}>
         <h2>Customer Reviews</h2>
         {product.reviews?.length > 0 ? (

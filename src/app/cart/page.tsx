@@ -1,8 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import Image from 'next/image';
-import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
+import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart } from '../../store/cartSlice';
 
 export default function CartPage() {
@@ -27,13 +28,19 @@ export default function CartPage() {
               <div style={{ flex: 1, marginLeft: 10 }}>
                 <h4 style={{ margin: '0 0 5px 0' }}>{item.title}</h4>
 
-                {/* ✅ Full description */}
                 <p style={{ margin: '0 0 5px 0', fontSize: 14, color: '#555' }}>
                   {item.description}
                 </p>
 
                 <p style={{ margin: 0, fontWeight: 500 }}>${item.price}</p>
               </div>
+
+              <Link
+                href={`/product/${item.id}`}
+                className="view-details-link"
+              >
+                View Details
+              </Link>
 
               <button
                 className="cart-btn remove"
@@ -44,8 +51,9 @@ export default function CartPage() {
             </div>
           ))}
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 
 }
