@@ -3,9 +3,11 @@ import ProductCard from './components/ProductCard';
 
 export default async function HomePage() {
   let products: Product[] = [];
+  // Generate a random limit between 5 and 20
+  const randomLimit = Math.floor(Math.random() * 10) + 5;
 
   try {
-    const res = await fetch('https://fakestoreapi.com/products', {
+    const res = await fetch(`https://fakestoreapi.com/products?limit=${randomLimit}`, {
       cache: 'no-store',
     });
 
