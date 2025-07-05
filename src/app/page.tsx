@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import ProductCard from './components/ProductCard';
 
 export default function HomePage() {
-  const limit = 8;
+  const limit = 10;
   const [products, setProducts] = useState<Product[]>([]);
   const [skip, setSkip] = useState(0);
   const [total, setTotal] = useState(0);
