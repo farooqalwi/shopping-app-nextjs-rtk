@@ -10,18 +10,15 @@ interface ProductDetailProps {
 
 export default async function ProductDetail({ params }: ProductDetailProps) {
   let product;
-  const productId = params.id;
 
   try {
-    const res = await fetch(`https://dummyjson.com/products/${productId}`, {
+    const res = await fetch(`https://dummyjson.com/products/${params.id}`, {
       cache: 'no-store',
     });
 
     if (!res.ok) return notFound();
 
     product = await res.json();
-
-    // ... return JSX
   } catch {
     return notFound();
   }
