@@ -28,7 +28,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="product-card">
       <Image
-        src={product.image}
+        src={product.image || '/placeholder.png'}
         alt={product.title}
         width={100}
         height={100}
