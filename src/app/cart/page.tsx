@@ -23,10 +23,18 @@ export default function CartPage() {
                 width={100}
                 height={100}
               />
-              <div style={{ flex: 1 }}>
+
+              <div style={{ flex: 1, marginLeft: 10 }}>
                 <h4 style={{ margin: '0 0 5px 0' }}>{item.title}</h4>
-                <p style={{ margin: 0 }}>${item.price}</p>
+
+                {/* ✅ Full description */}
+                <p style={{ margin: '0 0 5px 0', fontSize: 14, color: '#555' }}>
+                  {item.description}
+                </p>
+
+                <p style={{ margin: 0, fontWeight: 500 }}>${item.price}</p>
               </div>
+
               <button
                 className="cart-btn remove"
                 onClick={() => dispatch(removeFromCart(item.id))}
@@ -39,4 +47,5 @@ export default function CartPage() {
       )}
     </div>
   );
+
 }

@@ -54,13 +54,11 @@ body {
 .product-image {
   height: 100px;
   object-fit: contain;
-  margin-bottom: 8px;
 }
 
 .product-title {
   font-size: 14px;
   text-align: center;
-  min-height: 50px;
 }
 
 .product-price {
